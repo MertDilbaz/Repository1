@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VT-Seyahat | Uçuş Arama Sonuçları</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="min-h-screen bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex flex-col">
+                <h1 class="text-2xl font-bold text-blue-600">VT-Seyahat</h1>
+                <span class="text-sm text-gray-600">Bulutların Üzerinde Seyahat</span>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="text-blue-600 hover:text-blue-800">Ana Sayfa</a></li>
+                    <li><a href="login.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Giriş / Kayıt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Arama Kriterleri Özeti -->
+        <section class="bg-blue-600 text-white py-6">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap justify-between items-center">
+                    <div class="flex items-center mb-4 md:mb-0">
+                        <div class="mr-6">
+                            <span class="block text-sm">Nereden</span>
+                            <span class="text-xl font-bold" id="originDisplay">A Şehri</span>
+                        </div>
+                        <i class="fas fa-arrow-right mx-3"></i>
+                        <div class="ml-3">
+                            <span class="block text-sm">Nereye</span>
+                            <span class="text-xl font-bold" id="destinationDisplay">B Şehri</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap">
+                        <div class="mr-6 mb-2 md:mb-0">
+                            <span class="block text-sm">Tarih</span>
+                            <span class="font-bold" id="dateDisplay">15.10.2025</span>
+                        </div>
+                        <div>
+                            <span class="block text-sm">Yolcu</span>
+                            <span class="font-bold" id="passengersDisplay">1 Yolcu</span>
+                        </div>
+                    </div>
+                    <button id="changeSearchBtn" class="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-gray-100 mt-4 md:mt-0">
+                        <i class="fas fa-edit mr-2"></i>Aramayı Değiştir
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Uçuş Sonuçları -->
+        <section class="py-8">
+            <div class="container mx-auto px-4">
+                <!-- Filtreler -->
+                <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+                    <div class="flex flex-wrap items-center">
+                        <div class="mr-6 mb-2 md:mb-0">
+                            <label class="text-gray-600 mr-2">Sırala:</label>
+                            <select class="border rounded-md p-2">
+                                <option value="price-asc">Fiyat (Artan)</option>
+                                <option value="price-desc">Fiyat (Azalan)</option>
+                                <option value="time-asc">Kalkış Saati (Erken)</option>
+                                <option value="time-desc">Kalkış Saati (Geç)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-gray-600 mr-2">Filtrele:</label>
+                            <select class="border rounded-md p-2">
+                                <option value="all">Tüm Uçuşlar</option>
+                                <option value="morning">Sabah (06:00-12:00)</option>
+                                <option value="afternoon">Öğleden Sonra (12:00-18:00)</option>
+                                <option value="evening">Akşam (18:00-00:00)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sonuçlar Listesi -->
+                <div class="space-y-4" id="flightResults">
+                    <!-- Uçuş 1 -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                        <div class="flex flex-col md:flex-row justify-between">
+                            <div class="flex flex-col md:flex-row items-start md:items-center mb-4 md:mb-0">
+                                <div class="text-center mr-0 md:mr-8 mb-4 md:mb-0">
+                                    <span class="block text-xl font-bold text-blue-600">08:00</span>
+                                    <span class="text-gray-500">A Şehri</span>
+                                </div>
+                                <div class="hidden md:block">
+                                    <div class="flex items-center">
+                                        <div class="h-1 w-16 bg-gray-300"></div>
+                                        <div class="mx-2">
+                                            <i class="fas fa-plane text-blue-600"></i>
+                                        </div>
+                                        <div class="h-1 w-16 bg-gray-300"></div>
+                                    </div>
+                                    <div class="text-center text-sm text-gray-500 mt-1">2s 15dk</div>
+                                </div>
+                                <div class="text-center ml-0 md:ml-8">
+                                    <span class="block text-xl font-bold text-blue-600">10:15</span>
+                                    <span class="text-gray-500">B Şehri</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center md:items-end">
+                                <div class="mb-2">
+                                    <span class="text-2xl font-bold text-blue-600">1.250 ₺</span>
+                                </div>
+                                <a href="bilet-al.html?ucusId=1" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 text-center">
+                                    Seç
+                                </a>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-4 border-t">
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-plane-departure mr-2"></i>
+                                <span>Uçak: Boeing 737</span>
+                                <span class="mx-4">|</span>
+                                <i class="fas fa-suitcase mr-2"></i>
+                                <span>Bagaj: 15kg</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Uçuş 2 -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                        <div class="flex flex-col md:flex-row justify-between">
+                            <div class="flex flex-col md:flex-row items-start md:items-center mb-4 md:mb-0">
+                                <div class="text-center mr-0 md:mr-8 mb-4 md:mb-0">
+                                    <span class="block text-xl font-bold text-blue-600">14:30</span>
+                                    <span class="text-gray-500">A Şehri</span>
+                                </div>
+                                <div class="hidden md:block">
+                                    <div class="flex items-center">
+                                        <div class="h-1 w-16 bg-gray-300"></div>
+                                        <div class="mx-2">
+                                            <i class="fas fa-plane text-blue-600"></i>
+                                        </div>
+                                        <div class="h-1 w-16 bg-gray-300"></div>
+                                    </div>
+                                    <div class="text-center text-sm text-gray-500 mt-1">1s 55dk</div>
+                                </div>
+                                <div class="text-center ml-0 md:ml-8">
+                                    <span class="block text-xl font-bold text-blue-600">16:25</span>
+                                    <span class="text-gray-500">B Şehri</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center md:items-end">
+                                <div class="mb-2">
+                                    <span class="text-2xl font-bold text-blue-600">1.050 ₺</span>
+                                </div>
+                                <a href="bilet-al.html?ucusId=2" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 text-center">
+                                    Seç
+                                </a>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-4 border-t">
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-plane-departure mr-2"></i>
+                                <span>Uçak: Airbus A320</span>
+                                <span class="mx-4">|</span>
+                                <i class="fas fa-suitcase mr-2"></i>
+                                <span>Bagaj: 20kg</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Uçuş 3 -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                        <div class="flex flex-col md:flex-row justify-between">
+                            <div class="flex flex-col md:flex-row items-start md:items-center mb-4 md:mb-0">
+                                <div class="text-center mr-0 md:mr-8 mb-4 md:mb-0">
+                                    <span class="block text-xl font-bold text-blue-600">19:45</span>
+                                    <span class="text-gray-500">A Şehri</span>
+                                </div>
+                                <div class="hidden md:block">
+                                    <div class="flex items-center">
+                                        <div class="h-1 w-16 bg-gray-300"></div>
+                                        <div class="mx-2">
+                                            <i class="fas fa-plane text-blue-600"></i>
+                                        </div>
+                                        <div class="h-1 w-16 bg-gray-300"></div>
+                                    </div>
+                                    <div class="text-center text-sm text-gray-500 mt-1">2s 00dk</div>
+                                </div>
+                                <div class="text-center ml-0 md:ml-8">
+                                    <span class="block text-xl font-bold text-blue-600">21:45</span>
+                                    <span class="text-gray-500">B Şehri</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center md:items-end">
+                                <div class="mb-2">
+                                    <span class="text-2xl font-bold text-blue-600">950 ₺</span>
+                                </div>
+                                <a href="bilet-al.html?ucusId=3" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 text-center">
+                                    Seç
+                                </a>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-4 border-t">
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-plane-departure mr-2"></i>
+                                <span>Uçak: Boeing 737</span>
+                                <span class="mx-4">|</span>
+                                <i class="fas fa-suitcase mr-2"></i>
+                                <span>Bagaj: 15kg</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">VT-Seyehat Hakkında</h3>
+                    <p class="text-gray-400">VT-Seyahat, 2025 yılında kurulmuş olup A,B,C,D şehirleri arasında güvenli ve konforlu uçuş hizmetleri sunar</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">İletişim</h3>
+                    <p class="text-gray-400 flex items-center">
+                        <i class="fas fa-phone mr-2"></i>
+                        +90 (555) 123 45 67
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Hızlı Bağlantılar</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Ana Sayfa</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Uçuşlarınız</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Hakkımızda</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">İletişim</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">&copy; 2025 VT-Seyehat Tüm Hakları Saklıdır.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // URL parametrelerini al
+            const urlParams = new URLSearchParams(window.location.search);
+            const origin = urlParams.get('origin') || 'A';
+            const destination = urlParams.get('destination') || 'B';
+            const date = urlParams.get('date') || '2025-10-15';
+            const passengers = urlParams.get('passengers') || '1';
+            
+            // Arama kriterlerini görüntüle
+            document.getElementById('originDisplay').textContent = origin + ' Şehri';
+            document.getElementById('destinationDisplay').textContent = destination + ' Şehri';
+            
+            // Tarih formatını düzenle
+            const formattedDate = new Date(date).toLocaleDateString('tr-TR');
+            document.getElementById('dateDisplay').textContent = formattedDate;
+            
+            // Yolcu sayısını görüntüle
+            document.getElementById('passengersDisplay').textContent = passengers + ' Yolcu';
+            
+            // Aramayı değiştir butonuna tıklama
+            document.getElementById('changeSearchBtn').addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+            
+            // Filtre ve sıralama işlemleri buraya eklenebilir
+        });
+    </script>
+</body>
+</html> 

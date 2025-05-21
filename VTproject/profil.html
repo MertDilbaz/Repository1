@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VT-Seyahat | Kullanıcı Profili</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="min-h-screen bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex flex-col">
+                <h1 class="text-2xl font-bold text-blue-600">VT-Seyahat</h1>
+                <span class="text-sm text-gray-600">Bulutların Üzerinde Seyahat</span>
+            </div>
+            <nav>
+                <ul class="flex space-x-6 items-center">
+                    <li><a href="index.html" class="text-blue-600 hover:text-blue-800">Ana Sayfa</a></li>
+                    <li>
+                        <div class="relative group">
+                            <button class="flex items-center text-blue-600 hover:text-blue-800">
+                                <span class="mr-1">Ahmet Yılmaz</span>
+                                <i class="fas fa-user-circle text-xl"></i>
+                            </button>
+                            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 hidden group-hover:block">
+                                <a href="profil.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-user mr-2"></i>Profilim
+                                </a>
+                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-ticket-alt mr-2"></i>Biletlerim
+                                </a>
+                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-cog mr-2"></i>Ayarlar
+                                </a>
+                                <div class="border-t border-gray-100"></div>
+                                <a href="index.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>Çıkış Yap
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Sol Menü -->
+                <div class="md:w-1/4">
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <div class="flex flex-col items-center mb-6">
+                            <div class="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-4xl mb-3">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h2 class="text-xl font-semibold">Ahmet Yılmaz</h2>
+                            <p class="text-gray-600">ahmet.yilmaz@email.com</p>
+                        </div>
+                        
+                        <nav>
+                            <ul class="space-y-2">
+                                <li>
+                                    <a href="#profil" class="flex items-center p-2 rounded-md bg-blue-50 text-blue-600">
+                                        <i class="fas fa-user-circle w-6"></i>
+                                        <span>Profil Bilgileri</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#biletlerim" class="flex items-center p-2 rounded-md hover:bg-gray-50">
+                                        <i class="fas fa-ticket-alt w-6"></i>
+                                        <span>Biletlerim</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#gecmis-ucuslar" class="flex items-center p-2 rounded-md hover:bg-gray-50">
+                                        <i class="fas fa-history w-6"></i>
+                                        <span>Geçmiş Uçuşlar</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#adresler" class="flex items-center p-2 rounded-md hover:bg-gray-50">
+                                        <i class="fas fa-map-marker-alt w-6"></i>
+                                        <span>Adreslerim</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#odemeler" class="flex items-center p-2 rounded-md hover:bg-gray-50">
+                                        <i class="fas fa-credit-card w-6"></i>
+                                        <span>Ödeme Yöntemlerim</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#ayarlar" class="flex items-center p-2 rounded-md hover:bg-gray-50">
+                                        <i class="fas fa-cog w-6"></i>
+                                        <span>Hesap Ayarları</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                
+                <!-- Sağ İçerik -->
+                <div class="md:w-3/4">
+                    <!-- Profil Bilgileri -->
+                    <div id="profil" class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-xl font-semibold">Profil Bilgileri</h3>
+                            <button id="editProfileBtn" class="text-blue-600 hover:text-blue-800">
+                                <i class="fas fa-edit"></i> Düzenle
+                            </button>
+                        </div>
+                        
+                        <!-- Görüntüleme Modu -->
+                        <div id="profileViewMode">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h4 class="text-gray-500 text-sm mb-1">Ad</h4>
+                                    <p class="font-medium">Ahmet</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-500 text-sm mb-1">Soyad</h4>
+                                    <p class="font-medium">Yılmaz</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-500 text-sm mb-1">E-posta</h4>
+                                    <p class="font-medium">ahmet.yilmaz@email.com</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-500 text-sm mb-1">Telefon</h4>
+                                    <p class="font-medium">+90 555 123 4567</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-500 text-sm mb-1">Üyelik Türü</h4>
+                                    <p class="font-medium">Müşteri</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-500 text-sm mb-1">Üyelik Tarihi</h4>
+                                    <p class="font-medium">15 Mart 2025</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Düzenleme Modu -->
+                        <div id="profileEditMode" class="hidden">
+                            <form id="profileEditForm" class="space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="firstName" class="block text-gray-700 mb-1">Ad</label>
+                                        <input type="text" id="firstName" name="ad" value="Ahmet" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
+                                    </div>
+                                    <div>
+                                        <label for="lastName" class="block text-gray-700 mb-1">Soyad</label>
+                                        <input type="text" id="lastName" name="soyad" value="Yılmaz" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
+                                    </div>
+                                    <div>
+                                        <label for="email" class="block text-gray-700 mb-1">E-posta</label>
+                                        <input type="email" id="email" name="email" value="ahmet.yilmaz@email.com" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600" readonly>
+                                        <p class="text-xs text-gray-500 mt-1">E-posta adresinizi değiştirmek için müşteri hizmetleriyle iletişime geçin.</p>
+                                    </div>
+                                    <div>
+                                        <label for="phone" class="block text-gray-700 mb-1">Telefon</label>
+                                        <input type="tel" id="phone" name="telefon" value="+90 555 123 4567" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
+                                    </div>
+                                </div>
+                                
+                                <div class="flex justify-end space-x-2 pt-4">
+                                    <button type="button" id="cancelEditBtn" class="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50">İptal</button>
+                                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Kaydet</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Biletlerim -->
+                    <div id="biletlerim" class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-6">Biletlerim</h3>
+                        
+                        <div class="space-y-4">
+                            <!-- Aktif Bilet -->
+                            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div>
+                                        <div class="text-lg font-semibold text-blue-600">A Şehri → B Şehri</div>
+                                        <div class="text-gray-600">15 Ekim 2025, Çarşamba</div>
+                                    </div>
+                                    <div class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">Onaylandı</div>
+                                </div>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+                                    <div>
+                                        <span class="block text-gray-500 text-xs">Kalkış</span>
+                                        <span class="font-medium">08:00</span>
+                                    </div>
+                                    <div>
+                                        <span class="block text-gray-500 text-xs">Varış</span>
+                                        <span class="font-medium">10:15</span>
+                                    </div>
+                                    <div>
+                                        <span class="block text-gray-500 text-xs">PNR Kodu</span>
+                                        <span class="font-medium">ABC123</span>
+                                    </div>
+                                    <div>
+                                        <span class="block text-gray-500 text-xs">Koltuk</span>
+                                        <span class="font-medium">3A</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end space-x-2">
+                                    <a href="onay.html?ucusId=1&koltukNo=3A" class="text-blue-600 hover:text-blue-800 text-sm">
+                                        <i class="fas fa-eye mr-1"></i>
+                                        Detaylar
+                                    </a>
+                                    <a href="#" class="text-blue-600 hover:text-blue-800 text-sm">
+                                        <i class="fas fa-print mr-1"></i>
+                                        Yazdır
+                                    </a>
+                                    <a href="#" class="text-blue-600 hover:text-blue-800 text-sm">
+                                        <i class="fas fa-exchange-alt mr-1"></i>
+                                        Değiştir
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- İptal Edilmiş Bilet -->
+                            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div>
+                                        <div class="text-lg font-semibold text-blue-600">C Şehri → D Şehri</div>
+                                        <div class="text-gray-600">10 Eylül 2025, Pazartesi</div>
+                                    </div>
+                                    <div class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs">İptal Edildi</div>
+                                </div>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
+                                    <div>
+                                        <span class="block text-gray-500 text-xs">Kalkış</span>
+                                        <span class="font-medium">14:30</span>
+                                    </div>
+                                    <div>
+                                        <span class="block text-gray-500 text-xs">Varış</span>
+                                        <span class="font-medium">16:45</span>
+                                    </div>
+                                    <div>
+                                        <span class="block text-gray-500 text-xs">PNR Kodu</span>
+                                        <span class="font-medium">XYZ456</span>
+                                    </div>
+                                    <div>
+                                        <span class="block text-gray-500 text-xs">Koltuk</span>
+                                        <span class="font-medium">15B</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <a href="#" class="text-blue-600 hover:text-blue-800 text-sm">
+                                        <i class="fas fa-eye mr-1"></i>
+                                        Detaylar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Şifre Değiştirme -->
+                    <div id="ayarlar" class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-6">Şifre Değiştir</h3>
+                        
+                        <form id="passwordChangeForm" class="space-y-4">
+                            <div>
+                                <label for="currentPassword" class="block text-gray-700 mb-1">Mevcut Şifre</label>
+                                <input type="password" id="currentPassword" name="currentPassword" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
+                            </div>
+                            <div>
+                                <label for="newPassword" class="block text-gray-700 mb-1">Yeni Şifre</label>
+                                <input type="password" id="newPassword" name="newPassword" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
+                                <p class="text-xs text-gray-500 mt-1">Şifreniz en az 8 karakter olmalı ve büyük harf, küçük harf ve rakam içermelidir.</p>
+                            </div>
+                            <div>
+                                <label for="confirmPassword" class="block text-gray-700 mb-1">Yeni Şifre (Tekrar)</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
+                            </div>
+                            
+                            <div class="flex justify-end pt-4">
+                                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Şifreyi Değiştir</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">VT-Seyehat Hakkında</h3>
+                    <p class="text-gray-400">VT-Seyahat, 2025 yılında kurulmuş olup A,B,C,D şehirleri arasında güvenli ve konforlu uçuş hizmetleri sunar</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">İletişim</h3>
+                    <p class="text-gray-400 flex items-center">
+                        <i class="fas fa-phone mr-2"></i>
+                        +90 (555) 123 45 67
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Hızlı Bağlantılar</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Ana Sayfa</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Uçuşlarınız</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Hakkımızda</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">İletişim</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">&copy; 2025 VT-Seyehat Tüm Hakları Saklıdır.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Profil düzenleme toggle
+            const editProfileBtn = document.getElementById('editProfileBtn');
+            const profileViewMode = document.getElementById('profileViewMode');
+            const profileEditMode = document.getElementById('profileEditMode');
+            const cancelEditBtn = document.getElementById('cancelEditBtn');
+            
+            editProfileBtn.addEventListener('click', function() {
+                profileViewMode.classList.add('hidden');
+                profileEditMode.classList.remove('hidden');
+            });
+            
+            cancelEditBtn.addEventListener('click', function() {
+                profileEditMode.classList.add('hidden');
+                profileViewMode.classList.remove('hidden');
+            });
+            
+            // Profil düzenleme formu
+            const profileEditForm = document.getElementById('profileEditForm');
+            profileEditForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Burada form verileri API'ye gönderilebilir
+                alert('Profil bilgileriniz güncellendi!');
+                profileEditMode.classList.add('hidden');
+                profileViewMode.classList.remove('hidden');
+            });
+            
+            // Şifre değiştirme formu
+            const passwordChangeForm = document.getElementById('passwordChangeForm');
+            passwordChangeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                if (newPassword !== confirmPassword) {
+                    alert('Yeni şifreler eşleşmiyor!');
+                    return;
+                }
+                
+                // Burada şifre değiştirme API'sine istek gönderilebilir
+                alert('Şifreniz başarıyla değiştirildi!');
+                passwordChangeForm.reset();
+            });
+        });
+    </script>
+</body>
+</html> 

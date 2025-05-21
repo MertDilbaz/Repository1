@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VT-Seyahat | Bilet Yönetimi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="min-h-screen bg-gray-100">
+    <div class="flex h-screen bg-gray-100">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-800 text-white">
+            <div class="p-4 border-b border-gray-700">
+                <div class="flex items-center">
+                    <h2 class="text-xl font-bold">VT-Seyahat</h2>
+                    <span class="ml-2 bg-blue-500 text-xs px-2 py-1 rounded">Admin</span>
+                </div>
+                <p class="text-gray-400 text-sm">Yönetim Paneli</p>
+            </div>
+            
+            <nav class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="admin-dashboard.html" class="flex items-center p-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-tachometer-alt w-6"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-kullanicilar.html" class="flex items-center p-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-users w-6"></i>
+                            <span>Kullanıcılar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-ucaklar.html" class="flex items-center p-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-plane w-6"></i>
+                            <span>Uçaklar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-ucuslar.html" class="flex items-center p-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-route w-6"></i>
+                            <span>Uçuşlar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-koltuklar.html" class="flex items-center p-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-chair w-6"></i>
+                            <span>Koltuklar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-biletler.html" class="flex items-center p-2 rounded-md bg-blue-600">
+                            <i class="fas fa-ticket-alt w-6"></i>
+                            <span>Biletler</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-odemeler.html" class="flex items-center p-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-money-bill-wave w-6"></i>
+                            <span>Ödemeler</span>
+                        </a>
+                    </li>
+                    <li class="mt-8">
+                        <a href="index.html" class="flex items-center p-2 rounded-md hover:bg-gray-700 text-red-300 hover:text-red-200">
+                            <i class="fas fa-sign-out-alt w-6"></i>
+                            <span>Çıkış Yap</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <!-- Topbar -->
+            <header class="bg-white shadow-sm">
+                <div class="flex items-center justify-between p-4">
+                    <div>
+                        <h1 class="text-2xl font-semibold">Bilet Yönetimi</h1>
+                        <p class="text-sm text-gray-500">Tüm biletleri görüntüleyin ve yönetin</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="p-2 rounded-full hover:bg-gray-100">
+                            <i class="fas fa-bell text-gray-500"></i>
+                        </button>
+                        <div class="relative">
+                            <button class="flex items-center text-gray-700 hover:text-gray-900">
+                                <span class="mr-2">Admin Kullanıcı</span>
+                                <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                                    <i class="fas fa-user-shield"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="p-6">
+                <!-- Üst Araçlar -->
+                <div class="bg-white rounded-lg shadow-sm p-4 mb-6 flex flex-col md:flex-row md:items-center justify-between">
+                    <div class="mb-4 md:mb-0 flex flex-col md:flex-row md:items-center">
+                        <div class="relative mb-4 md:mb-0 md:mr-4">
+                            <input type="text" placeholder="PNR veya yolcu ara..." class="w-full md:w-64 pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                        <div class="flex space-x-2">
+                            <select class="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Tüm Durumlar</option>
+                                <option value="onaylandi">Onaylandı</option>
+                                <option value="beklemede">Beklemede</option>
+                                <option value="iptal">İptal Edildi</option>
+                            </select>
+                            <input type="date" class="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+                    <div>
+                        <button id="addTicketBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center">
+                            <i class="fas fa-plus mr-2"></i>
+                            Yeni Bilet Oluştur
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bilet İstatistikleri -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-green-100 text-green-500 mr-4">
+                                <i class="fas fa-check-circle text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-gray-500 text-sm">Onaylı Biletler</h3>
+                                <p class="text-2xl font-semibold">8,642</p>
+                                <p class="text-green-500 text-xs flex items-center mt-1">
+                                    <i class="fas fa-arrow-up mr-1"></i>
+                                    <span>12% artış</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-yellow-100 text-yellow-500 mr-4">
+                                <i class="fas fa-clock text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-gray-500 text-sm">Bekleyen Biletler</h3>
+                                <p class="text-2xl font-semibold">245</p>
+                                <p class="text-yellow-500 text-xs flex items-center mt-1">
+                                    <i class="fas fa-minus mr-1"></i>
+                                    <span>Sabit</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-red-100 text-red-500 mr-4">
+                                <i class="fas fa-times-circle text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-gray-500 text-sm">İptal Edilen</h3>
+                                <p class="text-2xl font-semibold">156</p>
+                                <p class="text-red-500 text-xs flex items-center mt-1">
+                                    <i class="fas fa-arrow-down mr-1"></i>
+                                    <span>5% azalış</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-blue-100 text-blue-500 mr-4">
+                                <i class="fas fa-money-bill-wave text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-gray-500 text-sm">Toplam Gelir</h3>
+                                <p class="text-2xl font-semibold">₺2,453,890</p>
+                                <p class="text-green-500 text-xs flex items-center mt-1">
+                                    <i class="fas fa-arrow-up mr-1"></i>
+                                    <span>15% artış</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bilet Tablosu -->
+                <div class="bg-white rounded-lg shadow-sm mb-6">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        PNR
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Yolcu
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Uçuş Bilgisi
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Koltuk
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Fiyat
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Durum
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        İşlemler
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <!-- Örnek Bilet 1 -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        ABC123
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-blue-100 text-blue-500">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">Ahmet Yılmaz</div>
+                                                <div class="text-sm text-gray-500">ahmet.yilmaz@email.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">VT123 - A → B</div>
+                                        <div class="text-sm text-gray-500">15.10.2025 08:00</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        1A (Business)
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        ₺1,250
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            Onaylandı
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <div class="flex space-x-2">
+                                            <button class="text-blue-600 hover:text-blue-900" title="Detaylar">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="text-indigo-600 hover:text-indigo-900" title="Düzenle">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-900" title="İptal Et">
+                                                <i class="fas fa-ban"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Örnek Bilet 2 -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        XYZ456
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-blue-100 text-blue-500">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">Mehmet Kaya</div>
+                                                <div class="text-sm text-gray-500">mehmet.kaya@email.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">VT124 - B → C</div>
+                                        <div class="text-sm text-gray-500">15.10.2025 14:30</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        15B (Ekonomi)
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        ₺850
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                            Beklemede
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <div class="flex space-x-2">
+                                            <button class="text-blue-600 hover:text-blue-900" title="Detaylar">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="text-indigo-600 hover:text-indigo-900" title="Düzenle">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-900" title="İptal Et">
+                                                <i class="fas fa-ban"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Sayfalama -->
+                    <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-sm text-gray-700">
+                                    <span class="font-medium">Toplam 9,043</span> biletten <span class="font-medium">1-10</span> arası gösteriliyor
+                                </p>
+                            </div>
+                            <div>
+                                <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </a>
+                                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-blue-50 text-sm font-medium text-blue-600 hover:bg-blue-100">
+                                        1
+                                    </a>
+                                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                        2
+                                    </a>
+                                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                        3
+                                    </a>
+                                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Modal - Bilet Detayları -->
+            <div id="ticketModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 hidden">
+                <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4">
+                    <div class="flex justify-between items-center border-b px-6 py-4">
+                        <h3 class="text-lg font-medium text-gray-900" id="modalTitle">Bilet Detayları</h3>
+                        <button id="closeModal" class="text-gray-400 hover:text-gray-500">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Yolcu Bilgileri -->
+                            <div>
+                                <h4 class="font-medium mb-4">Yolcu Bilgileri</h4>
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="block text-sm text-gray-500">Ad Soyad</label>
+                                        <p class="font-medium">Ahmet Yılmaz</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-500">E-posta</label>
+                                        <p class="font-medium">ahmet.yilmaz@email.com</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-500">Telefon</label>
+                                        <p class="font-medium">+90 555 123 4567</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Uçuş Bilgileri -->
+                            <div>
+                                <h4 class="font-medium mb-4">Uçuş Bilgileri</h4>
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="block text-sm text-gray-500">Uçuş No</label>
+                                        <p class="font-medium">VT123</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-500">Güzergah</label>
+                                        <p class="font-medium">A Şehri → B Şehri</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-500">Tarih/Saat</label>
+                                        <p class="font-medium">15.10.2025 08:00</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bilet Detayları -->
+                            <div>
+                                <h4 class="font-medium mb-4">Bilet Detayları</h4>
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="block text-sm text-gray-500">PNR Kodu</label>
+                                        <p class="font-medium">ABC123</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-500">Koltuk</label>
+                                        <p class="font-medium">1A (Business)</p>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-500">Fiyat</label>
+                                        <p class="font-medium">₺1,250</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Durum Bilgileri -->
+                            <div>
+                                <h4 class="font-medium mb-4">Durum Bilgileri</h4>
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="block text-sm text-gray-500">Bilet Durumu</label>
+                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            Onaylandı
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-500">Check-in Durumu</label>
+                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                            Beklemede
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-500">Satış Tarihi</label>
+                                        <p class="font-medium">10.10.2025 14:30</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 flex justify-end space-x-3">
+                            <button id="printTicketBtn" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                <i class="fas fa-print mr-2"></i>
+                                Bileti Yazdır
+                            </button>
+                            <button id="sendEmailBtn" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                <i class="fas fa-envelope mr-2"></i>
+                                E-posta Gönder
+                            </button>
+                            <button id="cancelTicketBtn" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
+                                <i class="fas fa-ban mr-2"></i>
+                                Bileti İptal Et
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal - Bilet İptal Onayı -->
+            <div id="cancelConfirmModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 hidden">
+                <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+                    <div class="p-6">
+                        <div class="flex items-center justify-center text-red-600 mb-4">
+                            <i class="fas fa-exclamation-triangle text-5xl"></i>
+                        </div>
+                        <h3 class="text-xl font-medium text-center text-gray-900 mb-2">Bileti İptal Et</h3>
+                        <p class="text-center text-gray-500 mb-6">Bu bileti iptal etmek istediğinizden emin misiniz? Bu işlem geri alınamaz ve ödeme iadesi gerektirebilir.</p>
+                        
+                        <div class="flex justify-center space-x-4">
+                            <button id="cancelDeleteBtn" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">
+                                Vazgeç
+                            </button>
+                            <button id="confirmCancelBtn" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
+                                İptal Et
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <footer class="bg-white p-4 border-t border-gray-200">
+                <div class="container mx-auto text-center text-gray-500 text-sm">
+                    &copy; 2025 VT-Seyahat Tüm Hakları Saklıdır.
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal elemanları
+            const ticketModal = document.getElementById('ticketModal');
+            const cancelConfirmModal = document.getElementById('cancelConfirmModal');
+            const closeModal = document.getElementById('closeModal');
+            const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+            const printTicketBtn = document.getElementById('printTicketBtn');
+            const sendEmailBtn = document.getElementById('sendEmailBtn');
+            const cancelTicketBtn = document.getElementById('cancelTicketBtn');
+            
+            // Detay butonları için event listener
+            document.querySelectorAll('[title="Detaylar"]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    ticketModal.classList.remove('hidden');
+                });
+            });
+            
+            // Modalleri kapatma
+            closeModal.addEventListener('click', function() {
+                ticketModal.classList.add('hidden');
+            });
+            
+            cancelDeleteBtn.addEventListener('click', function() {
+                cancelConfirmModal.classList.add('hidden');
+            });
+            
+            // Bilet yazdırma
+            printTicketBtn.addEventListener('click', function() {
+                window.print();
+            });
+            
+            // E-posta gönderme
+            sendEmailBtn.addEventListener('click', function() {
+                alert('Bilet bilgileri e-posta olarak gönderildi.');
+            });
+            
+            // Bilet iptal işlemi
+            cancelTicketBtn.addEventListener('click', function() {
+                cancelConfirmModal.classList.remove('hidden');
+            });
+            
+            document.getElementById('confirmCancelBtn').addEventListener('click', function() {
+                // Burada iptal işlemi gerçekleştirilecek
+                alert('Bilet başarıyla iptal edildi.');
+                cancelConfirmModal.classList.add('hidden');
+                ticketModal.classList.add('hidden');
+            });
+            
+            // Arama işlevi
+            const searchInput = document.querySelector('input[placeholder="PNR veya yolcu ara..."]');
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                // Burada arama işlemi gerçekleştirilecek
+                console.log('Arama terimi:', searchTerm);
+            });
+            
+            // Durum filtresi
+            const statusFilter = document.querySelector('select');
+            statusFilter.addEventListener('change', function(e) {
+                const selectedStatus = e.target.value;
+                // Burada filtreleme işlemi gerçekleştirilecek
+                console.log('Seçilen durum:', selectedStatus);
+            });
+        });
+    </script>
+</body>
+</html> 

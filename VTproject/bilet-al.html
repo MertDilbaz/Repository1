@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VT-Seyahat | Bilet Satın Al</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="min-h-screen bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex flex-col">
+                <h1 class="text-2xl font-bold text-blue-600">VT-Seyahat</h1>
+                <span class="text-sm text-gray-600">Bulutların Üzerinde Seyahat</span>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="text-blue-600 hover:text-blue-800">Ana Sayfa</a></li>
+                    <li><a href="login.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Giriş / Kayıt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="py-8">
+        <div class="container mx-auto px-4">
+            <!-- İşlem Adımları -->
+            <div class="flex justify-center mb-8">
+                <div class="flex items-center">
+                    <div class="relative flex flex-col items-center">
+                        <div class="rounded-full h-12 w-12 bg-blue-600 flex items-center justify-center text-white font-bold">1</div>
+                        <span class="mt-2 text-blue-600 font-medium">Uçuş Seçimi</span>
+                    </div>
+                    <div class="h-1 w-16 bg-blue-600 mx-4"></div>
+                    <div class="relative flex flex-col items-center">
+                        <div class="rounded-full h-12 w-12 bg-blue-600 flex items-center justify-center text-white font-bold">2</div>
+                        <span class="mt-2 text-blue-600 font-medium">Koltuk Seçimi</span>
+                    </div>
+                    <div class="h-1 w-16 bg-blue-600 mx-4"></div>
+                    <div class="relative flex flex-col items-center">
+                        <div class="rounded-full h-12 w-12 bg-gray-300 flex items-center justify-center text-gray-600 font-bold">3</div>
+                        <span class="mt-2 text-gray-600">Ödeme</span>
+                    </div>
+                    <div class="h-1 w-16 bg-gray-300 mx-4"></div>
+                    <div class="relative flex flex-col items-center">
+                        <div class="rounded-full h-12 w-12 bg-gray-300 flex items-center justify-center text-gray-600 font-bold">4</div>
+                        <span class="mt-2 text-gray-600">Onay</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Uçuş Bilgileri -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">Uçuş Bilgileri</h3>
+                        <div class="border-b pb-4 mb-4">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-xl font-bold text-blue-600" id="departureTime">08:00</span>
+                                    <span class="mx-2">-</span>
+                                    <span class="text-xl font-bold text-blue-600" id="arrivalTime">10:15</span>
+                                </div>
+                                <div>
+                                    <span class="text-gray-600" id="flightDate">15 Ekim 2025, Çarşamba</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center mt-4">
+                                <div>
+                                    <span class="font-bold" id="originCity">A Şehri</span>
+                                </div>
+                                <div class="mx-4 flex-grow">
+                                    <div class="flex items-center">
+                                        <div class="h-1 flex-grow bg-gray-300"></div>
+                                        <div class="mx-2">
+                                            <i class="fas fa-plane text-blue-600"></i>
+                                        </div>
+                                        <div class="h-1 flex-grow bg-gray-300"></div>
+                                    </div>
+                                    <div class="text-center text-sm text-gray-500 mt-1" id="flightDuration">2s 15dk</div>
+                                </div>
+                                <div>
+                                    <span class="font-bold" id="destinationCity">B Şehri</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-gray-600">Uçak</div>
+                                <div class="font-medium" id="aircraftType">Boeing 737</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-600">Uçuş No</div>
+                                <div class="font-medium" id="flightNumber">VT123</div>
+                            </div>
+                            <div>
+                                <div class="text-blue-600 font-bold text-xl" id="ticketPrice">1.250 ₺</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Koltuk Seçimi -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">Koltuk Seçimi</h3>
+                        
+                        <div class="flex justify-center mb-6">
+                            <div class="text-center">
+                                <div class="p-2 border-b border-gray-300">
+                                    <i class="fas fa-plane-departure text-2xl text-blue-600"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-center mb-6">
+                            <div class="grid grid-cols-6 gap-2 text-center">
+                                <div class="col-span-6 mb-4">
+                                    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs">Business Class</span>
+                                </div>
+                                
+                                <!-- Business Koltuklar -->
+                                <button class="seat business-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="1" data-seat-no="1A">1A</button>
+                                <button class="seat business-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="2" data-seat-no="1B">1B</button>
+                                <div class="col-span-2"></div>
+                                <button class="seat business-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="3" data-seat-no="1C">1C</button>
+                                <button class="seat business-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="4" data-seat-no="1D">1D</button>
+                                
+                                <button class="seat business-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="5" data-seat-no="2A">2A</button>
+                                <button class="seat business-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="6" data-seat-no="2B">2B</button>
+                                <div class="col-span-2"></div>
+                                <button class="seat business-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="7" data-seat-no="2C">2C</button>
+                                <button class="seat business-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="8" data-seat-no="2D">2D</button>
+                                
+                                <div class="col-span-6 my-4">
+                                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">Ekonomi Class</span>
+                                </div>
+                                
+                                <!-- Ekonomi Koltuklar (İlk 3 sıra) -->
+                                <button class="seat economy-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="9" data-seat-no="3A">3A</button>
+                                <button class="seat economy-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="10" data-seat-no="3B">3B</button>
+                                <button class="seat economy-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="11" data-seat-no="3C">3C</button>
+                                <button class="seat economy-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="12" data-seat-no="3D">3D</button>
+                                <button class="seat economy-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="13" data-seat-no="3E">3E</button>
+                                <button class="seat economy-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="14" data-seat-no="3F">3F</button>
+                                
+                                <button class="seat economy-seat p-2 border rounded-lg bg-gray-300 text-gray-500 cursor-not-allowed" data-seat-id="15" data-seat-no="4A" disabled>4A</button>
+                                <button class="seat economy-seat p-2 border rounded-lg bg-gray-300 text-gray-500 cursor-not-allowed" data-seat-id="16" data-seat-no="4B" disabled>4B</button>
+                                <button class="seat economy-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="17" data-seat-no="4C">4C</button>
+                                <button class="seat economy-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="18" data-seat-no="4D">4D</button>
+                                <button class="seat economy-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="19" data-seat-no="4E">4E</button>
+                                <button class="seat economy-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="20" data-seat-no="4F">4F</button>
+                                
+                                <button class="seat economy-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="21" data-seat-no="5A">5A</button>
+                                <button class="seat economy-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="22" data-seat-no="5B">5B</button>
+                                <button class="seat economy-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="23" data-seat-no="5C">5C</button>
+                                <button class="seat economy-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="24" data-seat-no="5D">5D</button>
+                                <button class="seat economy-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="25" data-seat-no="5E">5E</button>
+                                <button class="seat economy-seat p-2 border rounded-lg hover:bg-blue-100" data-seat-id="26" data-seat-no="5F">5F</button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-center space-x-6 mb-6">
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 border rounded mr-2"></div>
+                                <span class="text-sm">Müsait</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-blue-500 border rounded mr-2"></div>
+                                <span class="text-sm">Seçili</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-gray-300 border rounded mr-2"></div>
+                                <span class="text-sm">Dolu</span>
+                            </div>
+                        </div>
+                        
+                        <div id="selectedSeatsInfo" class="bg-blue-50 p-4 rounded-lg border border-blue-200 hidden">
+                            <h4 class="font-semibold mb-2">Seçilen Koltuk</h4>
+                            <div id="selectedSeatsList" class="flex flex-wrap gap-2"></div>
+                        </div>
+                    </div>
+
+                    <!-- Yolcu Bilgileri -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">Yolcu Bilgileri</h3>
+                        <form id="passengerForm">
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="font-medium mb-2">Yolcu 1</h4>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="firstName" class="block text-gray-700 mb-1">Ad</label>
+                                            <input type="text" id="firstName" name="firstName" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
+                                        </div>
+                                        <div>
+                                            <label for="lastName" class="block text-gray-700 mb-1">Soyad</label>
+                                            <input type="text" id="lastName" name="lastName" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="email" class="block text-gray-700 mb-1">E-posta</label>
+                                        <input type="email" id="email" name="email" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
+                                    </div>
+                                    <div>
+                                        <label for="phone" class="block text-gray-700 mb-1">Telefon</label>
+                                        <input type="tel" id="phone" name="phone" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Ödeme Özeti -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg shadow-lg p-6 sticky top-6">
+                        <h3 class="text-xl font-semibold mb-4">Ödeme Özeti</h3>
+                        <div class="space-y-3 border-b pb-4 mb-4">
+                            <div class="flex justify-between">
+                                <span>Bilet Fiyatı</span>
+                                <span class="font-medium" id="summaryTicketPrice">1.250 ₺</span>
+                            </div>
+                            <div class="flex justify-between text-gray-600">
+                                <span>Vergiler ve Harçlar</span>
+                                <span>350 ₺</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between font-bold text-lg mb-6">
+                            <span>Toplam</span>
+                            <span id="totalPrice">1.600 ₺</span>
+                        </div>
+                        <button id="proceedToPaymentBtn" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>
+                            Ödemeye Geç
+                        </button>
+                        <div class="mt-4 text-xs text-gray-500">
+                            "Ödemeye Geç" butonuna tıklayarak, <a href="#" class="text-blue-600 underline">Yolcu Sözleşmesi</a>'ni kabul etmiş olursunuz.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">VT-Seyehat Hakkında</h3>
+                    <p class="text-gray-400">VT-Seyahat, 2025 yılında kurulmuş olup A,B,C,D şehirleri arasında güvenli ve konforlu uçuş hizmetleri sunar</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">İletişim</h3>
+                    <p class="text-gray-400 flex items-center">
+                        <i class="fas fa-phone mr-2"></i>
+                        +90 (555) 123 45 67
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Hızlı Bağlantılar</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Ana Sayfa</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Uçuşlarınız</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Hakkımızda</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">İletişim</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">&copy; 2025 VT-Seyehat Tüm Hakları Saklıdır.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // URL parametrelerini al
+            const urlParams = new URLSearchParams(window.location.search);
+            const flightId = urlParams.get('ucusId') || '1';
+            
+            // Uçuş verilerini simüle et (normalde API'den gelecek)
+            const mockFlightData = {
+                '1': {
+                    departure: '08:00',
+                    arrival: '10:15',
+                    origin: 'A Şehri',
+                    destination: 'B Şehri',
+                    date: '15 Ekim 2025, Çarşamba',
+                    duration: '2s 15dk',
+                    aircraft: 'Boeing 737',
+                    flightNumber: 'VT123',
+                    price: 1250
+                },
+                '2': {
+                    departure: '14:30',
+                    arrival: '16:25',
+                    origin: 'A Şehri',
+                    destination: 'B Şehri',
+                    date: '15 Ekim 2025, Çarşamba',
+                    duration: '1s 55dk',
+                    aircraft: 'Airbus A320',
+                    flightNumber: 'VT456',
+                    price: 1050
+                },
+                '3': {
+                    departure: '19:45',
+                    arrival: '21:45',
+                    origin: 'A Şehri',
+                    destination: 'B Şehri',
+                    date: '15 Ekim 2025, Çarşamba',
+                    duration: '2s 00dk',
+                    aircraft: 'Boeing 737',
+                    flightNumber: 'VT789',
+                    price: 950
+                }
+            };
+            
+            // Uçuş bilgilerini doldur
+            const flightData = mockFlightData[flightId];
+            document.getElementById('departureTime').textContent = flightData.departure;
+            document.getElementById('arrivalTime').textContent = flightData.arrival;
+            document.getElementById('originCity').textContent = flightData.origin;
+            document.getElementById('destinationCity').textContent = flightData.destination;
+            document.getElementById('flightDate').textContent = flightData.date;
+            document.getElementById('flightDuration').textContent = flightData.duration;
+            document.getElementById('aircraftType').textContent = flightData.aircraft;
+            document.getElementById('flightNumber').textContent = flightData.flightNumber;
+            document.getElementById('ticketPrice').textContent = flightData.price + ' ₺';
+            document.getElementById('summaryTicketPrice').textContent = flightData.price + ' ₺';
+            
+            const taxPrice = 350;
+            const totalPrice = flightData.price + taxPrice;
+            document.getElementById('totalPrice').textContent = totalPrice + ' ₺';
+            
+            // Koltuk seçimi
+            const seats = document.querySelectorAll('.seat');
+            let selectedSeat = null;
+            
+            seats.forEach(seat => {
+                seat.addEventListener('click', function() {
+                    if (this.disabled) return;
+                    
+                    // Daha önce seçilmiş koltuğu temizle
+                    if (selectedSeat) {
+                        selectedSeat.classList.remove('bg-blue-500', 'text-white');
+                    }
+                    
+                    // Yeni koltuk seçimi
+                    if (selectedSeat !== this) {
+                        this.classList.add('bg-blue-500', 'text-white');
+                        selectedSeat = this;
+                        
+                        // Seçilen koltuk bilgisini göster
+                        const seatNo = this.getAttribute('data-seat-no');
+                        document.getElementById('selectedSeatsInfo').classList.remove('hidden');
+                        document.getElementById('selectedSeatsList').innerHTML = `
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded-md">${seatNo}</span>
+                        `;
+                        
+                        // Ödeme butonunu etkinleştir
+                        document.getElementById('proceedToPaymentBtn').disabled = false;
+                    } else {
+                        selectedSeat = null;
+                        document.getElementById('selectedSeatsInfo').classList.add('hidden');
+                        document.getElementById('selectedSeatsList').innerHTML = '';
+                        
+                        // Ödeme butonunu devre dışı bırak
+                        document.getElementById('proceedToPaymentBtn').disabled = true;
+                    }
+                });
+            });
+            
+            // Ödeme butonuna tıklama
+            document.getElementById('proceedToPaymentBtn').addEventListener('click', function() {
+                const formIsValid = document.getElementById('passengerForm').checkValidity();
+                
+                if (!formIsValid) {
+                    alert('Lütfen tüm yolcu bilgilerini doldurun.');
+                    return;
+                }
+                
+                if (!selectedSeat) {
+                    alert('Lütfen bir koltuk seçin.');
+                    return;
+                }
+                
+                // Normalde burada ödeme sayfasına yönlendirme yapılacak
+                window.location.href = 'odeme.html?ucusId=' + flightId + '&koltukNo=' + selectedSeat.getAttribute('data-seat-no');
+            });
+        });
+    </script>
+</body>
+</html> 

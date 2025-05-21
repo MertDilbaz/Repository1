@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VT-Seyahat | Uçak Yönetimi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="min-h-screen bg-gray-100">
+    <div class="flex h-screen bg-gray-100">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gray-800 text-white">
+            <div class="p-4 border-b border-gray-700">
+                <div class="flex items-center">
+                    <h2 class="text-xl font-bold">VT-Seyahat</h2>
+                    <span class="ml-2 bg-blue-500 text-xs px-2 py-1 rounded">Admin</span>
+                </div>
+                <p class="text-gray-400 text-sm">Yönetim Paneli</p>
+            </div>
+            
+            <nav class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="admin-dashboard.html" class="flex items-center p-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-tachometer-alt w-6"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-kullanicilar.html" class="flex items-center p-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-users w-6"></i>
+                            <span>Kullanıcılar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-ucaklar.html" class="flex items-center p-2 rounded-md bg-blue-600">
+                            <i class="fas fa-plane w-6"></i>
+                            <span>Uçaklar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-ucuslar.html" class="flex items-center p-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-route w-6"></i>
+                            <span>Uçuşlar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-koltuklar.html" class="flex items-center p-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-chair w-6"></i>
+                            <span>Koltuklar</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-biletler.html" class="flex items-center p-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-ticket-alt w-6"></i>
+                            <span>Biletler</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-odemeler.html" class="flex items-center p-2 rounded-md hover:bg-gray-700">
+                            <i class="fas fa-money-bill-wave w-6"></i>
+                            <span>Ödemeler</span>
+                        </a>
+                    </li>
+                    <li class="mt-8">
+                        <a href="index.html" class="flex items-center p-2 rounded-md hover:bg-gray-700 text-red-300 hover:text-red-200">
+                            <i class="fas fa-sign-out-alt w-6"></i>
+                            <span>Çıkış Yap</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <!-- Topbar -->
+            <header class="bg-white shadow-sm">
+                <div class="flex items-center justify-between p-4">
+                    <div>
+                        <h1 class="text-2xl font-semibold">Uçak Yönetimi</h1>
+                        <p class="text-sm text-gray-500">Filodaki tüm uçakları görüntüleyin ve yönetin</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="p-2 rounded-full hover:bg-gray-100">
+                            <i class="fas fa-bell text-gray-500"></i>
+                        </button>
+                        <div class="relative">
+                            <button class="flex items-center text-gray-700 hover:text-gray-900">
+                                <span class="mr-2">Admin Kullanıcı</span>
+                                <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                                    <i class="fas fa-user-shield"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="p-6">
+                <!-- Üst Araçlar -->
+                <div class="bg-white rounded-lg shadow-sm p-4 mb-6 flex flex-col md:flex-row md:items-center justify-between">
+                    <div class="mb-4 md:mb-0 flex flex-col md:flex-row md:items-center">
+                        <div class="relative mb-4 md:mb-0 md:mr-4">
+                            <input type="text" placeholder="Uçak ara..." class="w-full md:w-64 pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                        <div class="flex space-x-2">
+                            <select class="border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Tüm Modeller</option>
+                                <option value="Boeing 737">Boeing 737</option>
+                                <option value="Airbus A320">Airbus A320</option>
+                                <option value="Boeing 777">Boeing 777</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <button id="addAircraftBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center">
+                            <i class="fas fa-plus mr-2"></i>
+                            Yeni Uçak Ekle
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Uçak Tablosu -->
+                <div class="bg-white rounded-lg shadow-sm mb-6 overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        ID
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Uçak Adı
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Model
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Seri No
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Koltuk Sayısı
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        İşlemler
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <!-- Uçak 1 -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        1
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-blue-100 text-blue-500">
+                                                <i class="fas fa-plane"></i>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">VT Hava 1</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        Boeing 737
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        B737-12345
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        189
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <div class="flex space-x-2">
+                                            <button class="text-blue-600 hover:text-blue-900 view-seats-btn" data-aircraft-id="1">
+                                                <i class="fas fa-chair"></i>
+                                            </button>
+                                            <button class="text-indigo-600 hover:text-indigo-900 edit-aircraft-btn" data-aircraft-id="1">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-900 delete-aircraft-btn" data-aircraft-id="1">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Uçak 2 -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        2
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-blue-100 text-blue-500">
+                                                <i class="fas fa-plane"></i>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">VT Hava 2</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        Airbus A320
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        A320-54321
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        180
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <div class="flex space-x-2">
+                                            <button class="text-blue-600 hover:text-blue-900 view-seats-btn" data-aircraft-id="2">
+                                                <i class="fas fa-chair"></i>
+                                            </button>
+                                            <button class="text-indigo-600 hover:text-indigo-900 edit-aircraft-btn" data-aircraft-id="2">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-900 delete-aircraft-btn" data-aircraft-id="2">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Uçak 3 -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        3
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-blue-100 text-blue-500">
+                                                <i class="fas fa-plane"></i>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">VT Hava 3</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        Boeing 777
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        B777-98765
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        368
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <div class="flex space-x-2">
+                                            <button class="text-blue-600 hover:text-blue-900 view-seats-btn" data-aircraft-id="3">
+                                                <i class="fas fa-chair"></i>
+                                            </button>
+                                            <button class="text-indigo-600 hover:text-indigo-900 edit-aircraft-btn" data-aircraft-id="3">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-900 delete-aircraft-btn" data-aircraft-id="3">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Uçak 4 -->
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                        4
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-blue-100 text-blue-500">
+                                                <i class="fas fa-plane"></i>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">VT Hava 4</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        Airbus A320
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        A320-67890
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        180
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <div class="flex space-x-2">
+                                            <button class="text-blue-600 hover:text-blue-900 view-seats-btn" data-aircraft-id="4">
+                                                <i class="fas fa-chair"></i>
+                                            </button>
+                                            <button class="text-indigo-600 hover:text-indigo-900 edit-aircraft-btn" data-aircraft-id="4">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-900 delete-aircraft-btn" data-aircraft-id="4">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Sayfalama -->
+                    <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-sm text-gray-700">
+                                    <span class="font-medium">Toplam 10</span> uçaktan <span class="font-medium">1-4</span> arası gösteriliyor
+                                </p>
+                            </div>
+                            <div>
+                                <nav class="inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </a>
+                                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-blue-50 text-sm font-medium text-blue-600 hover:bg-blue-100">
+                                        1
+                                    </a>
+                                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                        2
+                                    </a>
+                                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                        3
+                                    </a>
+                                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Modal - Uçak Ekleme/Düzenleme -->
+            <div id="aircraftModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 hidden">
+                <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+                    <div class="flex justify-between items-center border-b px-6 py-4">
+                        <h3 class="text-lg font-medium text-gray-900" id="modalTitle">Yeni Uçak Ekle</h3>
+                        <button id="closeModal" class="text-gray-400 hover:text-gray-500">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <form id="aircraftForm" class="p-6">
+                        <input type="hidden" id="aircraftId" name="id" value="">
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label for="aircraftName" class="block text-sm font-medium text-gray-700">Uçak Adı</label>
+                                <input type="text" id="aircraftName" name="ucak_adi" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            </div>
+                            
+                            <div>
+                                <label for="aircraftModel" class="block text-sm font-medium text-gray-700">Model</label>
+                                <select id="aircraftModel" name="model" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                    <option value="Boeing 737">Boeing 737</option>
+                                    <option value="Airbus A320">Airbus A320</option>
+                                    <option value="Boeing 777">Boeing 777</option>
+                                    <option value="Airbus A380">Airbus A380</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="serialNumber" class="block text-sm font-medium text-gray-700">Seri No</label>
+                                <input type="text" id="serialNumber" name="seri_no" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            </div>
+                            
+                            <div>
+                                <label for="seatCount" class="block text-sm font-medium text-gray-700">Koltuk Sayısı</label>
+                                <input type="number" id="seatCount" name="koltuk_sayisi" required min="1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <p class="mt-1 text-xs text-gray-500">Uçak ekledikten sonra koltuklar otomatik olarak oluşturulacaktır.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 flex justify-end">
+                            <button type="button" id="cancelBtn" class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 mr-3">
+                                İptal
+                            </button>
+                            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                Kaydet
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Modal - Uçak Silme Onayı -->
+            <div id="deleteModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 hidden">
+                <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+                    <div class="p-6">
+                        <div class="flex items-center justify-center text-red-600 mb-4">
+                            <i class="fas fa-exclamation-triangle text-5xl"></i>
+                        </div>
+                        <h3 class="text-xl font-medium text-center text-gray-900 mb-2">Uçağı Sil</h3>
+                        <p class="text-center text-gray-500 mb-6">Bu uçağı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz ve bu uçakla ilişkili tüm uçuşlar ve koltuklar silinecektir.</p>
+                        
+                        <div class="flex justify-center space-x-4">
+                            <button id="cancelDeleteBtn" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">
+                                İptal
+                            </button>
+                            <button id="confirmDeleteBtn" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
+                                Sil
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Modal - Koltuk Görüntüleme -->
+            <div id="seatsModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 hidden">
+                <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4">
+                    <div class="flex justify-between items-center border-b px-6 py-4">
+                        <h3 class="text-lg font-medium text-gray-900" id="seatsModalTitle">Uçak Koltukları: VT Hava 1</h3>
+                        <button id="closeSeatsModal" class="text-gray-400 hover:text-gray-500">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="bg-gray-100 p-4 mb-6 rounded-lg">
+                            <h4 class="font-medium mb-2">Koltuk Durumu</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <div class="flex items-center">
+                                        <div class="w-4 h-4 bg-green-500 rounded-full mr-2"></div>
+                                        <span>Müsait: <span id="availableSeatsCount">120</span></span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex items-center">
+                                        <div class="w-4 h-4 bg-red-500 rounded-full mr-2"></div>
+                                        <span>Rezerve Edilmiş: <span id="reservedSeatsCount">69</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-center mb-4">
+                            <div class="text-center">
+                                <div class="p-2 border-b border-gray-300 mb-4">
+                                    <i class="fas fa-plane text-blue-600 text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-x-auto">
+                            <div class="inline-block min-w-full">
+                                <div class="text-center mb-4">
+                                    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs">Business Class</span>
+                                </div>
+                                
+                                <div class="grid grid-cols-6 gap-2 mb-6">
+                                    <!-- Business Koltuklar (İlk 2 sıra) -->
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">1A</div>
+                                    <div class="p-2 text-center bg-red-100 text-red-700 rounded">1B</div>
+                                    <div class="p-2 text-center">Koridor</div>
+                                    <div class="p-2 text-center">Koridor</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">1C</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">1D</div>
+                                    
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">2A</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">2B</div>
+                                    <div class="p-2 text-center">Koridor</div>
+                                    <div class="p-2 text-center">Koridor</div>
+                                    <div class="p-2 text-center bg-red-100 text-red-700 rounded">2C</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">2D</div>
+                                </div>
+                                
+                                <div class="text-center mb-4">
+                                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">Ekonomi Class</span>
+                                </div>
+                                
+                                <div class="grid grid-cols-6 gap-2">
+                                    <!-- Ekonomi Koltuklar (Örnek olarak 4 sıra gösteriliyor) -->
+                                    <div class="p-2 text-center bg-red-100 text-red-700 rounded">3A</div>
+                                    <div class="p-2 text-center bg-red-100 text-red-700 rounded">3B</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">3C</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">3D</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">3E</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">3F</div>
+                                    
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">4A</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">4B</div>
+                                    <div class="p-2 text-center bg-red-100 text-red-700 rounded">4C</div>
+                                    <div class="p-2 text-center bg-red-100 text-red-700 rounded">4D</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">4E</div>
+                                    <div class="p-2 text-center bg-red-100 text-red-700 rounded">4F</div>
+                                    
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">5A</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">5B</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">5C</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">5D</div>
+                                    <div class="p-2 text-center bg-red-100 text-red-700 rounded">5E</div>
+                                    <div class="p-2 text-center bg-red-100 text-red-700 rounded">5F</div>
+                                    
+                                    <div class="p-2 text-center bg-red-100 text-red-700 rounded">6A</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">6B</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">6C</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">6D</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">6E</div>
+                                    <div class="p-2 text-center bg-green-100 text-green-700 rounded">6F</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-center space-x-6 mt-6">
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-green-100 border border-green-700 rounded mr-2"></div>
+                                <span class="text-sm">Müsait</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-red-100 border border-red-700 rounded mr-2"></div>
+                                <span class="text-sm">Rezerve Edilmiş</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-right">
+                            <a href="admin-koltuklar.html?ucak_id=1" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                                <span>Tüm koltukları görüntüle</span>
+                                <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <footer class="bg-white p-4 border-t border-gray-200">
+                <div class="container mx-auto text-center text-gray-500 text-sm">
+                    &copy; 2025 VT-Seyahat Tüm Hakları Saklıdır.
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal elemanları
+            const aircraftModal = document.getElementById('aircraftModal');
+            const deleteModal = document.getElementById('deleteModal');
+            const seatsModal = document.getElementById('seatsModal');
+            const addAircraftBtn = document.getElementById('addAircraftBtn');
+            const closeModal = document.getElementById('closeModal');
+            const closeSeatsModal = document.getElementById('closeSeatsModal');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const aircraftForm = document.getElementById('aircraftForm');
+            const modalTitle = document.getElementById('modalTitle');
+            const editAircraftBtns = document.querySelectorAll('.edit-aircraft-btn');
+            const deleteAircraftBtns = document.querySelectorAll('.delete-aircraft-btn');
+            const viewSeatsBtns = document.querySelectorAll('.view-seats-btn');
+            const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+            
+            // Yeni uçak ekle butonu
+            addAircraftBtn.addEventListener('click', function() {
+                modalTitle.textContent = 'Yeni Uçak Ekle';
+                aircraftForm.reset();
+                document.getElementById('aircraftId').value = '';
+                aircraftModal.classList.remove('hidden');
+            });
+            
+            // Uçak düzenleme butonları
+            editAircraftBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const aircraftId = this.getAttribute('data-aircraft-id');
+                    modalTitle.textContent = 'Uçağı Düzenle';
+                    
+                    // Normalde burada API'den uçak verisi çekilir
+                    // Burada örnek veri ile dolduruyoruz
+                    if (aircraftId === '1') {
+                        document.getElementById('aircraftName').value = 'VT Hava 1';
+                        document.getElementById('aircraftModel').value = 'Boeing 737';
+                        document.getElementById('serialNumber').value = 'B737-12345';
+                        document.getElementById('seatCount').value = '189';
+                    } else if (aircraftId === '2') {
+                        document.getElementById('aircraftName').value = 'VT Hava 2';
+                        document.getElementById('aircraftModel').value = 'Airbus A320';
+                        document.getElementById('serialNumber').value = 'A320-54321';
+                        document.getElementById('seatCount').value = '180';
+                    } else if (aircraftId === '3') {
+                        document.getElementById('aircraftName').value = 'VT Hava 3';
+                        document.getElementById('aircraftModel').value = 'Boeing 777';
+                        document.getElementById('serialNumber').value = 'B777-98765';
+                        document.getElementById('seatCount').value = '368';
+                    }
+                    
+                    document.getElementById('aircraftId').value = aircraftId;
+                    aircraftModal.classList.remove('hidden');
+                });
+            });
+            
+            // Koltukları görüntüleme butonları
+            viewSeatsBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const aircraftId = this.getAttribute('data-aircraft-id');
+                    let aircraftName = '';
+                    
+                    // Uçak adını bulma
+                    if (aircraftId === '1') aircraftName = 'VT Hava 1';
+                    else if (aircraftId === '2') aircraftName = 'VT Hava 2';
+                    else if (aircraftId === '3') aircraftName = 'VT Hava 3';
+                    else if (aircraftId === '4') aircraftName = 'VT Hava 4';
+                    
+                    document.getElementById('seatsModalTitle').textContent = 'Uçak Koltukları: ' + aircraftName;
+                    
+                    // Burada koltuk verilerini çekerek modal doldurulabilir
+                    // Şimdilik sabit veriler kullanıyoruz
+                    
+                    seatsModal.classList.remove('hidden');
+                });
+            });
+            
+            // Uçak silme butonları
+            deleteAircraftBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const aircraftId = this.getAttribute('data-aircraft-id');
+                    document.getElementById('confirmDeleteBtn').setAttribute('data-aircraft-id', aircraftId);
+                    deleteModal.classList.remove('hidden');
+                });
+            });
+            
+            // Modalleri kapatma
+            [closeModal, cancelBtn].forEach(btn => {
+                btn.addEventListener('click', function() {
+                    aircraftModal.classList.add('hidden');
+                });
+            });
+            
+            closeSeatsModal.addEventListener('click', function() {
+                seatsModal.classList.add('hidden');
+            });
+            
+            cancelDeleteBtn.addEventListener('click', function() {
+                deleteModal.classList.add('hidden');
+            });
+            
+            // Uçak formu gönderimi
+            aircraftForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const aircraftId = document.getElementById('aircraftId').value;
+                const formData = new FormData(aircraftForm);
+                const data = Object.fromEntries(formData);
+                
+                console.log('Form verileri:', data);
+                // Burada sunucuya POST/PUT isteği gönderilebilir
+                
+                if (aircraftId) {
+                    alert('Uçak başarıyla güncellendi!');
+                } else {
+                    alert('Yeni uçak başarıyla eklendi!');
+                }
+                
+                aircraftModal.classList.add('hidden');
+            });
+            
+            // Uçak silme onayı
+            confirmDeleteBtn.addEventListener('click', function() {
+                const aircraftId = this.getAttribute('data-aircraft-id');
+                
+                console.log('Silinecek uçak ID:', aircraftId);
+                // Burada sunucuya DELETE isteği gönderilebilir
+                
+                alert('Uçak başarıyla silindi!');
+                deleteModal.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html> 

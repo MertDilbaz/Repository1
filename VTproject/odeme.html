@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VT-Seyahat | Ödeme</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="min-h-screen bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex flex-col">
+                <h1 class="text-2xl font-bold text-blue-600">VT-Seyahat</h1>
+                <span class="text-sm text-gray-600">Bulutların Üzerinde Seyahat</span>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="text-blue-600 hover:text-blue-800">Ana Sayfa</a></li>
+                    <li><a href="login.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Giriş / Kayıt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="py-8">
+        <div class="container mx-auto px-4">
+            <!-- İşlem Adımları -->
+            <div class="flex justify-center mb-8">
+                <div class="flex items-center">
+                    <div class="relative flex flex-col items-center">
+                        <div class="rounded-full h-12 w-12 bg-blue-600 flex items-center justify-center text-white font-bold">1</div>
+                        <span class="mt-2 text-blue-600 font-medium">Uçuş Seçimi</span>
+                    </div>
+                    <div class="h-1 w-16 bg-blue-600 mx-4"></div>
+                    <div class="relative flex flex-col items-center">
+                        <div class="rounded-full h-12 w-12 bg-blue-600 flex items-center justify-center text-white font-bold">2</div>
+                        <span class="mt-2 text-blue-600 font-medium">Koltuk Seçimi</span>
+                    </div>
+                    <div class="h-1 w-16 bg-blue-600 mx-4"></div>
+                    <div class="relative flex flex-col items-center">
+                        <div class="rounded-full h-12 w-12 bg-blue-600 flex items-center justify-center text-white font-bold">3</div>
+                        <span class="mt-2 text-blue-600 font-medium">Ödeme</span>
+                    </div>
+                    <div class="h-1 w-16 bg-gray-300 mx-4"></div>
+                    <div class="relative flex flex-col items-center">
+                        <div class="rounded-full h-12 w-12 bg-gray-300 flex items-center justify-center text-gray-600 font-bold">4</div>
+                        <span class="mt-2 text-gray-600">Onay</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Ödeme Formu -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">Ödeme Bilgileri</h3>
+                        
+                        <form id="paymentForm" class="space-y-6">
+                            <!-- Ödeme Yöntemi Seçimi -->
+                            <div>
+                                <label class="block text-gray-700 mb-2">Ödeme Yöntemi</label>
+                                <div class="grid grid-cols-3 md:grid-cols-4 gap-4">
+                                    <div class="border p-3 rounded-lg cursor-pointer bg-blue-50 border-blue-300">
+                                        <input type="radio" name="paymentMethod" id="creditCard" value="creditCard" class="hidden" checked>
+                                        <label for="creditCard" class="flex flex-col items-center cursor-pointer">
+                                            <i class="fas fa-credit-card text-blue-600 text-2xl mb-2"></i>
+                                            <span class="text-sm text-center">Kredi Kartı</span>
+                                        </label>
+                                    </div>
+                                    <div class="border p-3 rounded-lg cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="paymentMethod" id="bankTransfer" value="bankTransfer" class="hidden">
+                                        <label for="bankTransfer" class="flex flex-col items-center cursor-pointer">
+                                            <i class="fas fa-university text-gray-600 text-2xl mb-2"></i>
+                                            <span class="text-sm text-center">Havale</span>
+                                        </label>
+                                    </div>
+                                    <div class="border p-3 rounded-lg cursor-pointer hover:bg-gray-50">
+                                        <input type="radio" name="paymentMethod" id="paypal" value="paypal" class="hidden">
+                                        <label for="paypal" class="flex flex-col items-center cursor-pointer">
+                                            <i class="fab fa-paypal text-gray-600 text-2xl mb-2"></i>
+                                            <span class="text-sm text-center">PayPal</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Kredi Kartı Formu -->
+                            <div id="creditCardForm">
+                                <div class="mb-4">
+                                    <label for="cardHolder" class="block text-gray-700 mb-1">Kart Sahibi</label>
+                                    <input type="text" id="cardHolder" name="cardHolder" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600" placeholder="Ad Soyad">
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label for="cardNumber" class="block text-gray-700 mb-1">Kart Numarası</label>
+                                    <div class="relative">
+                                        <input type="text" id="cardNumber" name="cardNumber" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600" placeholder="0000 0000 0000 0000">
+                                        <div class="absolute right-3 top-3">
+                                            <i class="fab fa-cc-visa text-gray-400 mx-1"></i>
+                                            <i class="fab fa-cc-mastercard text-gray-400 mx-1"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label for="expiryDate" class="block text-gray-700 mb-1">Son Kullanma Tarihi</label>
+                                        <input type="text" id="expiryDate" name="expiryDate" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600" placeholder="AA/YY">
+                                    </div>
+                                    <div>
+                                        <label for="cvv" class="block text-gray-700 mb-1">CVV</label>
+                                        <input type="text" id="cvv" name="cvv" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600" placeholder="123">
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="saveCard" class="mr-2">
+                                        <span class="text-gray-700">Kart bilgilerimi gelecekteki alışverişler için kaydet</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="border-t pt-4">
+                                <h4 class="font-semibold mb-2">Fatura Adresi</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label for="country" class="block text-gray-700 mb-1">Ülke</label>
+                                        <select id="country" name="country" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
+                                            <option value="TR" selected>Türkiye</option>
+                                            <option value="US">ABD</option>
+                                            <option value="GB">Birleşik Krallık</option>
+                                            <option value="DE">Almanya</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="city" class="block text-gray-700 mb-1">Şehir</label>
+                                        <input type="text" id="city" name="city" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label for="address" class="block text-gray-700 mb-1">Adres</label>
+                                    <textarea id="address" name="address" rows="2" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"></textarea>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="zipCode" class="block text-gray-700 mb-1">Posta Kodu</label>
+                                        <input type="text" id="zipCode" name="zipCode" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Sipariş Özeti -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg shadow-lg p-6 sticky top-6">
+                        <h3 class="text-xl font-semibold mb-4">Sipariş Özeti</h3>
+                        
+                        <div class="border-b pb-4 mb-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium" id="flightRoute">A Şehri → B Şehri</span>
+                                <span id="flightDate">15 Ekim 2025</span>
+                            </div>
+                            <div class="flex justify-between text-sm text-gray-600 mb-2">
+                                <span>Uçuş No: <span id="flightNumber">VT123</span></span>
+                                <span>Koltuk: <span id="seatNumber">3A</span></span>
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                <span>Yolcu: <span id="passengerName">Ahmet Yılmaz</span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-3 border-b pb-4 mb-4">
+                            <div class="flex justify-between">
+                                <span>Bilet Fiyatı</span>
+                                <span class="font-medium" id="ticketPrice">1.250 ₺</span>
+                            </div>
+                            <div class="flex justify-between text-gray-600">
+                                <span>Vergiler ve Harçlar</span>
+                                <span>350 ₺</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between font-bold text-lg mb-6">
+                            <span>Toplam</span>
+                            <span id="totalPrice">1.600 ₺</span>
+                        </div>
+                        
+                        <button id="completePaymentBtn" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700">
+                            Ödemeyi Tamamla
+                        </button>
+                        
+                        <div class="mt-4 text-xs text-gray-500 flex items-center">
+                            <i class="fas fa-lock mr-1"></i>
+                            Güvenli ödeme - Tüm bilgileriniz 256-bit SSL ile şifrelenir
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">VT-Seyehat Hakkında</h3>
+                    <p class="text-gray-400">VT-Seyahat, 2025 yılında kurulmuş olup A,B,C,D şehirleri arasında güvenli ve konforlu uçuş hizmetleri sunar</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">İletişim</h3>
+                    <p class="text-gray-400 flex items-center">
+                        <i class="fas fa-phone mr-2"></i>
+                        +90 (555) 123 45 67
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Hızlı Bağlantılar</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Ana Sayfa</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Uçuşlarınız</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Hakkımızda</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">İletişim</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">&copy; 2025 VT-Seyehat Tüm Hakları Saklıdır.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // URL parametrelerini al
+            const urlParams = new URLSearchParams(window.location.search);
+            const flightId = urlParams.get('ucusId') || '1';
+            const seatNo = urlParams.get('koltukNo') || '3A';
+            
+            // Uçuş verilerini simüle et (normalde API'den gelecek)
+            const mockFlightData = {
+                '1': {
+                    route: 'A Şehri → B Şehri',
+                    date: '15 Ekim 2025',
+                    flightNumber: 'VT123',
+                    price: 1250
+                },
+                '2': {
+                    route: 'A Şehri → B Şehri',
+                    date: '15 Ekim 2025',
+                    flightNumber: 'VT456',
+                    price: 1050
+                },
+                '3': {
+                    route: 'A Şehri → B Şehri',
+                    date: '15 Ekim 2025',
+                    flightNumber: 'VT789',
+                    price: 950
+                }
+            };
+            
+            // Simüle edilmiş kullanıcı verileri
+            const mockUserData = {
+                firstName: 'Ahmet',
+                lastName: 'Yılmaz',
+                email: 'ahmet.yilmaz@email.com',
+                phone: '+90 555 123 4567'
+            };
+            
+            // Sipariş özeti bilgilerini doldur
+            const flightData = mockFlightData[flightId];
+            document.getElementById('flightRoute').textContent = flightData.route;
+            document.getElementById('flightDate').textContent = flightData.date;
+            document.getElementById('flightNumber').textContent = flightData.flightNumber;
+            document.getElementById('seatNumber').textContent = seatNo;
+            document.getElementById('passengerName').textContent = mockUserData.firstName + ' ' + mockUserData.lastName;
+            document.getElementById('ticketPrice').textContent = flightData.price + ' ₺';
+            
+            const taxPrice = 350;
+            const totalPrice = flightData.price + taxPrice;
+            document.getElementById('totalPrice').textContent = totalPrice + ' ₺';
+            
+            // Ödeme yöntemleri arasında geçiş
+            const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
+            const methodContainers = document.querySelectorAll('.border.p-3.rounded-lg.cursor-pointer');
+            
+            paymentMethods.forEach((method, index) => {
+                method.addEventListener('change', function() {
+                    // Tüm konteynerleri sıfırla
+                    methodContainers.forEach(container => {
+                        container.classList.remove('bg-blue-50', 'border-blue-300');
+                        container.classList.add('hover:bg-gray-50');
+                    });
+                    
+                    // Seçili yöntemi vurgula
+                    if (this.checked) {
+                        methodContainers[index].classList.add('bg-blue-50', 'border-blue-300');
+                        methodContainers[index].classList.remove('hover:bg-gray-50');
+                    }
+                });
+            });
+            
+            // Kart numarası formatlaması
+            const cardNumberInput = document.getElementById('cardNumber');
+            cardNumberInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 0) {
+                    value = value.match(/.{1,4}/g).join(' ');
+                }
+                e.target.value = value;
+            });
+            
+            // Son kullanma tarihi formatlaması
+            const expiryDateInput = document.getElementById('expiryDate');
+            expiryDateInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value;
+            });
+            
+            // Ödemeyi tamamla butonuna tıklama
+            document.getElementById('completePaymentBtn').addEventListener('click', function() {
+                const paymentForm = document.getElementById('paymentForm');
+                
+                if (!paymentForm.checkValidity()) {
+                    alert('Lütfen gerekli tüm alanları doldurun.');
+                    return;
+                }
+                
+                // Normalde burada ödeme işlemi API'ye gönderilecek
+                // Başarılı ödeme sonrası onay sayfasına yönlendirme
+                alert('Ödeme işlemi başarıyla gerçekleştirildi!');
+                window.location.href = 'onay.html?ucusId=' + flightId + '&koltukNo=' + seatNo;
+            });
+        });
+    </script>
+</body>
+</html> 

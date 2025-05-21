@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VT-Seyahat | Uçak Bileti Satış</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="min-h-screen bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex flex-col">
+                <h1 class="text-2xl font-bold text-blue-600">VT-Seyahat</h1>
+                <span class="text-sm text-gray-600">Bulutların Üzerinde Seyahat</span>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="text-blue-600 hover:text-blue-800">Ana Sayfa</a></li>
+                    <li><a href="login.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Giriş / Kayıt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-blue-600 text-white py-16">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-3xl font-bold">VT-Seyahat ile Güvenli ve Konforlu Uçuş Deneyimi</h2>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section class="py-12">
+            <div class="container mx-auto px-4">
+                <div class="bg-white rounded-lg shadow-lg p-8 max-w-4xl mx-auto">
+                    <h3 class="text-2xl font-semibold mb-6">Uçuş Bilgileriniz</h3>
+
+                    <form id="bookingForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="origin" class="block text-gray-700 mb-2">Nereden</label>
+                                <select name="origin" id="origin" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
+                                    <option value="" disabled selected>Şehir Seçin</option>
+                                    <option value="A">A Şehri</option>
+                                    <option value="B">B Şehri</option>
+                                    <option value="C">C Şehri</option>
+                                    <option value="D">D Şehri</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="destination" class="block text-gray-700 mb-2">Nereye</label>
+                                <select name="destination" id="destination" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
+                                    <option value="" disabled selected>Şehir Seçin</option>
+                                    <option value="A">A Şehri</option>
+                                    <option value="B">B Şehri</option>
+                                    <option value="C">C Şehri</option>
+                                    <option value="D">D Şehri</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="date" class="block text-gray-700 mb-2">Tarih</label>
+                                <input type="date" id="date" name="date" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600">
+                            </div>
+
+                            <div>
+                                <label for="passengers" class="block text-gray-700 mb-2">Yolcu Sayısı</label>
+                                <div class="flex items-center space-x-2">
+                                    <button type="button" id="decrease" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">-</button>
+                                    <input type="number" id="passengers" name="passengers" value="1" min="1" max="9" readonly class="w-20 text-center p-2 border border-gray-300 rounded-lg">
+                                    <button type="button" id="increase" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="ucus-arama.html" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 flex items-center justify-center space-x-2">
+                            <i class="fas fa-search"></i>
+                            <span>Uçuş Ara</span>
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center p-6">
+                        <i class="fas fa-plane text-4xl text-blue-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Güvenli Uçuşlar</h3>
+                        <p class="text-gray-600">Yüksek Konfor Standartları ile Yolculuk</p>
+                    </div>
+                    <div class="text-center p-6">
+                        <i class="fas fa-ticket-alt text-4xl text-blue-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Uygun Fiyatlar</h3>
+                        <p class="text-gray-600">Bütçenize Uygun Ekonomik Bilet Seçenekleri</p>
+                    </div>
+                    <div class="text-center p-6">
+                        <i class="fas fa-headset text-4xl text-blue-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">7/24 Destek</h3>
+                        <p class="text-gray-600">Her an yanınızda olan müşteri hizmetleri</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">VT-Seyehat Hakkında</h3>
+                    <p class="text-gray-400">VT-Seyahat, 2025 yılında kurulmuş olup A,B,C,D şehirleri arasında güvenli ve konforlu uçuş hizmetleri sunar</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">İletişim</h3>
+                    <p class="text-gray-400 flex items-center">
+                        <i class="fas fa-phone mr-2"></i>
+                        +90 (555) 123 45 67
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Hızlı Bağlantılar</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Ana Sayfa</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Uçuşlarınız</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Hakkımızda</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">İletişim</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">&copy; 2025 VT-Seyehat Tüm Hakları Saklıdır.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Yolcu sayısı kontrolü için JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const decreaseBtn = document.getElementById('decrease');
+            const increaseBtn = document.getElementById('increase');
+            const passengersInput = document.getElementById('passengers');
+
+            decreaseBtn.addEventListener('click', function() {
+                const currentValue = parseInt(passengersInput.value);
+                if (currentValue > 1) {
+                    passengersInput.value = currentValue - 1;
+                }
+            });
+
+            increaseBtn.addEventListener('click', function() {
+                const currentValue = parseInt(passengersInput.value);
+                if (currentValue < 9) {
+                    passengersInput.value = currentValue + 1;
+                }
+            });
+
+            // Form gönderimi
+            const bookingForm = document.getElementById('bookingForm');
+            bookingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(bookingForm);
+                const data = Object.fromEntries(formData);
+                console.log('Form verileri:', data);
+                // Burada form verilerini işleyebilir veya API'ye gönderebilirsiniz
+            });
+        });
+    </script>
+</body>
+</html> 
